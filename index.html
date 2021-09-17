@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/add.css" />
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/add.js"></script>
+    <title>Virginia Tech Thrift Store</title>
+	
+	
+	* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-maroon: #8b1f41;
+  --main-orange: #e87722;
+  --main-stone: #75787b;
+  --main-teal: #508590;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+img {
+  display: block;
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--main-maroon);
+  padding: 16px 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-header__left img {
+  float: left;
+  width: 80px;
+  height: auto;
+}
+
+.main-header__middle form {
+  display: flex;
+  align-items: center;
+}
+
+.main-header__middle input[type='text'] {
+  display: none;
+  padding: 8px;
+  margin: 0 8px;
+  border: 0;
+  border-bottom: 1px solid white;
+  background: transparent;
+  width: 300px;
+  color: white;
+  font-size: 1rem;
+}
+
+.main-header__middle input[type='text']::placeholder {
+  color: white;
+  font-size: 1rem;
+}
+
+.main-header__middle input[type='text']:focus {
+  outline: none;
+}
+
+.main-header__middle input[type='submit'] {
+  display: none;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  background-image: url(../image/icon/search.svg);
+  border: 0;
+}
+
+.main-header__right {
+  display: flex;
+  align-items: center;
+}
+
+.main-header__right img {
+  float: left;
+  width: 24px;
+  height: auto;
+  margin: 0 0 0 8px;
+}
+
+/* drop down hambar */
+.userbar {
+  display: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.hambar {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.userbar span {
+  font-size: 1.2rem;
+  color: white;
+  padding: 0 0 0 8px;
+}
+
+.hambar__dropdown-content,
+.userbar__dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 24px;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.hambar__dropdown-content a,
+.userbar__dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.hambar__dropdown-content a:hover,
+.userbar__dropdown-content a:hover {
+  color: white;
+  background: var(--main-maroon);
+}
+
+.hambar:hover .hambar__dropdown-content,
+.userbar:hover .userbar__dropdown-content {
+  display: block;
+}
+
+/* Menu-bar */
+.menu-bar {
+  display: none;
+  margin: 66px 0 0 0;
+}
+
+.menu-bar ol {
+  list-style-type: none;
+  overflow: hidden;
+  background-color: var(--main-stone);
+}
+
+.menu-bar ol li {
+  float: left;
+  width: 180px;
+}
+
+.menu-bar ol li a {
+  display: block;
+  padding: 16px;
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.menu-bar ol li a:hover {
+  color: var(--main-stone);
+  background: var(--main-orange);
+  transition: 0.5s;
+}
+
+/* Advertise */
+.advertise {
+  margin: 60px 0 0 0;
+}
+
+.advertise img {
+  width: 100vw;
+  height: auto;
+}
+
+/* Product by Category */
+.category {
+  padding: 16px 8px;
+  overflow: hidden;
+}
+
+.category > a:first-child {
+  display: inline-block;
+  border: 0;
+  color: var(--main-orange);
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 8px 0;
+  text-decoration: none;
+}
+
+.category-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-list a {
+  width: calc((100% - 16px) / 2);
+  height: 180px;
+}
+
+.category-list a:nth-last-child(1),
+.category-list a:nth-last-child(2) {
+  display: none;
+}
+
+.category-list a img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.category a:nth-child(3) {
+  float: right;
+  border: 0;
+  margin: 4px 0;
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--main-teal);
+  text-decoration: none;
+}
+
+.main-footer {
+  padding: 32px 8px 16px 8px;
+  background: var(--main-maroon);
+  color: white;
+}
+
+.main-footer > a {
+  float: right;
+  background: transparent;
+  color: var(--main-orange);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.main-footer ol {
+  list-style-type: none;
+}
+
+.main-footer ol li {
+  margin: 4px 0;
+}
+
+.main-footer ol li a {
+  text-decoration: none;
+  color: var(--main-orange);
+  font-weight: bold;
+}
+
+.main-footer > div {
+  color: var(--main-stone);
+}
+
+@media screen and (min-width: 768px) {
+  .main-header__middle input[type='text'] {
+    display: block;
+  }
+
+  .main-header__middle input[type='submit'] {
+    display: block;
+  }
+
+  .userbar {
+    display: inline-block;
+  }
+
+  .main-header__right a img:first-child {
+    display: none;
+  }
+
+  .hambar {
+    display: none;
+  }
+
+  /* Menu */
+  .menu-bar {
+    display: block;
+  }
+  /* Advertise */
+  .advertise {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .advertise img {
+    object-fit: cover;
+    width: 50vw;
+    height: 500px;
+  }
+
+  /* Category */
+  .category-list {
+    justify-content: space-around;
+  }
+  .category-list a:nth-last-child(1),
+  .category-list a:nth-last-child(2) {
+    display: block;
+  }
+
+  .category-list > a {
+    width: calc((100vw - 160px) / 4);
+    height: calc((100vw - 160px) / 4);
+    transition: transform 0.2s;
+  }
+
+  .category-list > a:hover {
+    transform: scale(1.05);
+  }
+
+  /* Footer */
+  .main-footer ol {
+    overflow: hidden;
+  }
+  .main-footer ol li {
+    float: left;
+    width: 200px;
+    padding: 0 0 16px 0;
+  }
+
+  .main-footer a:hover {
+    color: var(--main-teal);
+  }
+}
+	</style>
+	
+  </head>
+
+  <body>
+    <header>
+      <div class="main-header">
+        <div class="main-header__left">
+          <a href="index.html"
+            ><img src="./image/logo-white.png" alt="logo"
+          /></a>
+        </div>
+        <div class="main-header__middle">
+          <form action="result.html" method="get">
+            <label for="search-middle"></label>
+            <input
+              type="text"
+              placeholder="Search for goods"
+              id="search-middle"
+              name="search"
+              required
+            />
+            <input type="submit" value="" />
+          </form>
+        </div>
+        <div class="main-header__right">
+          <a href="list.html"
+            ><img src="./image/icon/search.svg" alt="search"
+          /></a>
+          <div class="userbar">
+            <span>Hi, Tina.</span>
+            <img src="./image/icon/user.svg" alt="user" />
+            <div class="userbar__dropdown-content">
+              <a href="#">My Account</a>
+              <a href="add.html">Sell a thing</a>
+              <a href="index.html">Logout</a>
+            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="stylesheet" type="text/css" href="css/add.css" />
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/add.js"></script>
+  <title>Virginia Tech Thrift Store</title>
+</head>
+
+<body>
+  <header>
+    <div class="main-header">
+      <div class="main-header__left">
+        <a href="index.html"><img src="./image/logo-white.png" alt="logo" /></a>
+      </div>
+      <div class="main-header__middle">
+        <form action="result.html" method="get">
+          <label for="search-middle"></label>
+          <input type="text" placeholder="Search for goods" id="search-middle" name="search" required />
+          <input type="submit" value="" />
+        </form>
+      </div>
+      <div class="main-header__right">
+        <a href="list.html"><img src="./image/icon/search.svg" alt="search" /></a>
+        <div class="userbar">
+          <span>Hi, Tina.</span>
+          <img src="./image/icon/user.svg" alt="user" />
+          <div class="userbar__dropdown-content">
+            <a href="#">My Account</a>
+            <a href="add.html">Sell a thing</a>
+            <a href="index.html">Logout</a>
+          </div>
+        </div>
+
+          <img src="./image/icon/cart.svg" alt="cart" />
+          <div class="hambar">
+            <img src="./image/icon/hambars.svg" alt="menu" />
+            <div class="hambar__dropdown-content">
+              <a href="#">My Account</a>
+              <a href="add.html">Sell an item</a>
+              <a href="index.html">Logout</a>
+            </div>
+        <img src="./image/icon/cart.svg" alt="cart" />
+        <div class="hambar">
+          <img src="./image/icon/hambars.svg" alt="menu" />
+          <div class="hambar__dropdown-content">
+            <a href="#">My Account</a>
+            <a href="add.html">Sell an item</a>
+            <a href="index.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="menu-bar">
+      <ol>
+        <li><a href="list.html">Electonics</a></li>
+        <li><a href="list.html">Fashion</a></li>
+        <li><a href="list.html">Sports</a></li>
+        <li><a href="list.html">Home Decoration</a></li>
+      </ol>
+    </div>
+    <!-- breadcrum -->
+    <div class="breadcrum">
+      <a href="#">My Account</a>
+      <span>></span>
+      <span>Sell an item</span>
+    </div>
+    <!-- create product -->
+    <div class="create-product">
+      <!-- product form -->
+      <form class="create-form">
+        <div class="create-form__left">
+          <div>
+            <label for="product">Product</label>
+            <input
+              type="text"
+              id="product"
+              name="product"
+              placeholder="Airpods pro"
+            />
+          </div>
+          <div>
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price" placeholder="30" />
+          </div>
+  </header>
+  <div class="menu-bar">
+    <ol>
+      <li><a href="list.html">Electonics</a></li>
+      <li><a href="list.html">Fashion</a></li>
+      <li><a href="list.html">Sports</a></li>
+      <li><a href="list.html">Home Decoration</a></li>
+    </ol>
+  </div>
+  <!-- breadcrum -->
+  <div class="breadcrum">
+    <a href="#">My Account</a>
+    <span>></span>
+    <span>Sell an item</span>
+  </div>
+  <!-- create product -->
+  <div class="create-product">
+    <!-- product form -->
+    <form class="create-form">
+      <div class="create-form__left">
+        <div>
+          <label for="product">Product</label>
+          <input type="text" id="product" name="product" placeholder="Airpods pro" />
+        </div>
+        <div>
+          <label for="price">Price</label>
+          <input type="text" id="price" name="price" placeholder="30" />
+        </div>
+        <div>
+          <label for="category">Category</label>
+          <select name="sorting">
+            <option value=""></option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="sports">Sports</option>
+          </select>
+        </div>
+        <div>
+          <label for="description">Description</label>
+          <textarea id="description" name="description" placeholder="The condition of your item."></textarea>
+        </div>
+        <div class="promotion-radio">
+          <p>Promotion</p>
+          <div>
+            <label for="category">Category</label>
+            <select name="sorting">
+              <option value=""></option>
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion</option>
+              <option value="sports">Sports</option>
+            </select>
+            <input type="radio" id="promtion-a" name="promtion-a" />
+            <label for="promtion-a">Plan A: Home page advertise</label>
+          </div>
+          <div>
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="The condition of your item."
+            ></textarea>
+          </div>
+          <div class="promotion-radio">
+            <p>Promotion</p>
+            <div>
+              <input type="radio" id="promtion-a" name="promtion-a" />
+              <label for="promtion-a">Plan A: Home page advertise</label>
+            </div>
+            <div>
+              <input type="radio" id="promtion-b" name="promtion-b" />
+              <label for="promtion-b">Plan B: Side bar advertise</label>
+            </div>
+            <input type="radio" id="promtion-b" name="promtion-b" />
+            <label for="promtion-b">Plan B: Side bar advertise</label>
+          </div>
+        </div>
+        <div class="create-form__right">
+          <!-- image upload -->
+      </div>
+      <div class="create-form__right">
+        <!-- image upload -->
+        <div>
+          <label for="image">Image</label>
+          <div>
+            <label for="image">Image</label>
+            <div>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/png, image/jpeg"
+              />
+              <button class="upload">Upload</button>
+              <button>Delete</button>
+            </div>
+            <img src="#" alt="upload image" id="preview-image" />
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg" />
+            <button class="upload">Upload</button>
+            <button>Delete</button>
+          </div>
+          <!-- post product -->
+          <button type="submit" class="form-action-btn">Post</button>
+          <a href="index.html"
+            ><button type="button" class="form-action-btn">Return</button></a
+          >
+          <img src="#" alt="upload image" id="preview-image" />
+        </div>
+      </form>
+    </div>
+    <!-- footer -->
+    <footer class="main-footer">
+      <a href="#">Back to top &uarr;</a>
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Category</a></li>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Shopping Cart</a></li>
+        <li><a href="#">About us</a></li>
+      </ol>
+      <div>Copyright &copy; Virginia Tech Thrift Store</div>
+    </footer>
+  </body>
+</html>
+        <!-- post product -->
+        <button type="submit" class="form-action-btn">Post</button>
+        <a href="index.html"><button type="button" class="form-action-btn">Return</button></a>
+      </div>
+    </form>
+  </div>
+  <!-- footer -->
+  <footer class="main-footer">
+    <a href="#">Back to top &uarr;</a>
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Category</a></li>
+      <li><a href="#">My Account</a></li>
+      <li><a href="#">Shopping Cart</a></li>
+      <li><a href="#">About us</a></li>
+    </ol>
+    <div>Copyright &copy; Virginia Tech Thrift Store</div>
+  </footer>
+</body>
+
+</html> 
+ BIN +0 Bytes (100%) mysite/db.sqlite3 
+Binary file not shown.
+  3  mysite/templates/base.html 
+@@ -38,7 +38,7 @@
+          <div class="userbar__dropdown-content">
+
+            {% if request.session.username %}
+            <a href="#">My Account</a>
+            <a href="{% url 'thrifts:home' %}">My Account</a>
+            <a href="{% url 'thrifts:sell' %}">Sell a thing</a>
+            <a href="{% url 'thrifts:logout' %}">Logout</a>
+            {% else %}
+@@ -89,5 +89,6 @@
+    <div>Copyright &copy; Virginia Tech Thrift Store</div>
+  </footer>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+
+</html> 
+ BIN +53 Bytes (100%) mysite/thrifts/__pycache__/models.cpython-37.pyc 
+Binary file not shown.
+ BIN +0 Bytes (100%) mysite/thrifts/__pycache__/urls.cpython-37.pyc 
+Binary file not shown.
+ BIN +142 Bytes (110%) mysite/thrifts/__pycache__/views.cpython-37.pyc 
+Binary file not shown.
+  10  mysite/thrifts/models.py 
+@@ -45,6 +45,8 @@ def __init__(self, comment, buyer, seller, date_posted):
+comments = [comment1, comment2, comment3, comment4]
+
+products = []
+fake_selling_list = []
+
+for i in range(1, 20):
+    if i % 3 == 1:
+        product = Product(i,
+@@ -75,9 +77,13 @@ def __init__(self, comment, buyer, seller, date_posted):
+            comments)
+
+    products.append(product)
+    if i < 4:
+        fake_selling_list.append(product)
+
+fakeuser = {'username': "user1", 'password': "password"}
+fakeadmin = {'username': "admin", 'password': "password"}
+
+
+    fakeuser = {'username': "user1", 'password': "password"}
+    admin = {"username": "admin", "password": "password"}
+
+
+
+ 32  mysite/thrifts/static/thrifts/css/home.css 
+@@ -1,9 +1,41 @@
+:root {
+  --main-maroon: #8b1f41;
+  --main-orange: #e87722;
+  --main-stone: #75787b;
+  --main-teal: #508590;
+}
+
+.login-container {
+  height: 80vh;
+}
+
+.selling-list-container > h4 {
+  padding: 8px;
+  border-bottom: 1px solid var(--main-stone);
+}
+
+.selling {
+  padding: 16px 0;
+}
+
+.selling img {
+  object-fit: cover;
+  width: 80px;
+  height: 80px;
+}
+
+.selling button {
+  float: right;
+  margin: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  .login-container {
+    height: 65vh;
+  }
+
+  .selling img {
+    width: 100px;
+    height: 100px;
+  }
+}
+  9  mysite/thrifts/templates/thrifts/add.html 
+@@ -2,9 +2,13 @@
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+  integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/add.css' %}" />
+{% endblock css %}
+{% block container %}
+
+{% if  request.session.username %}
+<div class="breadcrum">
+  <a href="{% url 'thrifts:home' %}">My Account</a>
+  <span>></span>
+@@ -65,4 +69,9 @@
+    </div>
+  </form>
+</div>
+{% endif %}
+<div class="container vh-100">
+  <h3>You do not have access to this page.</h3>
+  <a href="{% url 'thrifts:home' %}">Login</a> to have explore more stuffs!
+</div>
+{% endblock container %} 
+  71  mysite/thrifts/templates/thrifts/home.html 
+@@ -1,18 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load humanize %}
+{% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+      integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/home.css' %}" />
+{% endblock css %}
+{% block container %}
+
+
+<!-- if the user login, show the dashboard -->
+{% if  request.session.username %}
+<div class="container py-5 dashboard-container">
+  You can see your dashboard.
+  <div class="row pt-5 pt-md-0">
+    <div class="col-sm-12 col-md-6 selling-list-container">
+      <!-- title of the list stuffs -->
+      {% if request.session.role == 'admin' %}
+      <h4>Total Listed Stuffs.</h4>
+      {% elif request.session.role == 'regular' %}
+      <h4>Your Listed Stuffs.</h4>
+      {% endif %}
+
+      <!-- single stuffs -->
+      {% for selling in selling_list %}
+      <section class="selling container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <img src="{% static selling.img.0 %}" alt="selling-snapshot">
+          </div>
+          <div class="col-6">
+            <h4>{{ selling.name }}</h4>
+            <h4>$ {{selling.price }}</h4>
+            <p>{{ selling.date_posted | naturaltime }}</p>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-secondary">Edit</button>
+            {% if request.session.role == 'admin' %}
+            <button type="button" class="btn btn-danger" data-toggle="modal"
+              data-target="#confirmDeleteModal">Delete</button>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+      {% endfor %}
+
+    </div>
+    <div class="col-sm-12 col-md-6"></div>
+  </div>
+</div>
+
+
+<!-- if the user does not login, show the login box -->
+{% else %}
+<div class="container py-5 login-container">
+  <div class="row pt-5 pt-md-0">
+@@ -39,8 +75,23 @@ <h3>Login</h3>
+  </div>
+</div>
+{% endif %}
+
+
+
+{% endblock container %}
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you really want to delete this product?</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        The action can not be undo.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Delete
+        </button>
+        <button type="button" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock container %} 
+ 14  mysite/thrifts/views.py 
+@@ -1,25 +1,29 @@
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.template import loader
+from .models import products, fakeuser
+from .models import products, fakeuser, fake_selling_list, fakeadmin
+# Create your views here.
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the app index.")
+
+def home(request):
+    return render(request, 'thrifts/home.html')
+    context = {'selling_list': fake_selling_list}
+    print(context)
+    return render(request, 'thrifts/home.html', context)
+
+def login(request):
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+
+    if username == fakeuser['username'] and password == fakeuser['password']:
+        request.session['username'] = username
+        request.session['role'] = 'regular'
+        return render(request, 'thrifts/home.html')
+    else:
+        return render(request, 'thrifts/home.html')
+    elif username == fakeadmin['username'] and password == fakeadmin['password']:
+        request.session['username'] = username
+        request.session['role'] = 'admin'
+    return redirect('thrifts:home')
+
+def logout(request):
+    try:
